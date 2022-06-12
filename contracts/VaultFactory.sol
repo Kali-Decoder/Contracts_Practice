@@ -5,8 +5,7 @@ import './base/Level.sol';
 import './Vault.sol';
 
 contract VaultFactory is Level{
-    function createInstance(bytes32 _password)  external   returns(address){
-       
+    function createInstance(uint _password)  external returns(address){
         Vault vault = new Vault(_password);
         return address(vault);
     }
