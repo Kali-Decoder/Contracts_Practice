@@ -47,10 +47,10 @@ contract DTinder{
 
     }
 
-    function getMatchableUsers() view external userExist(msg.sender) returns(User[] memory){
+    function getMatchableUsers(string memory _city) view external userExist(msg.sender) returns(User[] memory){
         User storage user = users[msg.sender];
         uint oppositeGender= user.gender==Gender.MALE ? 1: 0;
-        address[] storage userIds= userIdsByCity[keccak256(abi.encodePacked(user.city))][oppositeGender];
+        address[] storage userIds= userIdsByCity[keccak256(abi.encodePacked(_city))][oppositeGender];
         uint matchableUsersCount;
 
         for(uint i=0;i<userIds.length;i++){
@@ -74,6 +74,8 @@ contract DTinder{
 
 
     }
+
+
 
     function swipe(SwipeStatus _swipeStatus,address _userId) userExist(msg.sender) external userExist(_userId) {
         require(swipes[msg.sender][_userId] == SwipeStatus.UNKNOWN,"Cannot swipe same person twice ");
