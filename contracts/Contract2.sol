@@ -10,6 +10,5 @@ contract Contract2  {
         Contract3 createdContract3 = new Contract3(); 
         emit ContractCreation(address(createdContract3));
         return address(createdContract3); 
-
     }
 }
